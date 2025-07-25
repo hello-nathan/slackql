@@ -8,8 +8,9 @@ import (
 )
 
 func main() {
-	token := getEnv("SLACK_BOT_TOKEN", "")
-	api := slack.New(token) // FIXME options on api
+	botToken := getEnv("SLACK_BOT_TOKEN", "")
+	appToken := getEnv("SLACK_APP_TOKEN", "")
+	api := slack.New(botToken, slack.OptionAppLevelToken(appToken)) // FIXME options on api
 	client := socketmode.New(api)
 	handler := &Handler{
 		client: client,
